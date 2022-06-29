@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 45%;
+      }
+
+      .container img {
+        object-fit: scale-down;
+      }
+
+      .main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 16px;
+        /*In the original, the height of the image container is controlled programatically*/
+      }
+
+      .main img {
+        max-width: 576px; /*max-width and max-height taken directly from Amazon*/
+        max-height: 443px; /*These are also controlled via js*/
+        height: 100%!important;
+      }
+
+      .thumbnails {
+        display: flex;
+        gap: 8px;
+      }
+
+      .thumbnails img {
+        width: 40px;
+        height: 40px;
+
+        outline: 2px solid gray;
+      }
+
+      .thumbnails img.active {
+        outline: 2px solid orange;
+        box-shadow: 0 0 2px 2px orange;
+      }
+    </style>
+  </head>
+
+  <!---->
+
+  <body>
+    <div class="container">
+      <div class="main">
+        <img src="res/amazon-plant-product.jpg" alt="" />
+      </div>
+      <div class="thumbnails">
+        <img src="res/amazon-plant-product.jpg" alt="" class="" />
+        <img src="res/amazon-plant-product-2.jpg" alt="" />
+        <img src="res/amazon-plant-product-3.jpg" alt="" />
+        <img src="res/amazon-plant-product-4.jpg" alt="" />
+      </div>
+    </div>
+
+    <!---->
+
+    <script>
+      // Function is inside parentheses to create an anonymous function.
+      (function () {
+        let container = document.querySelector(".container");
+
+        let mainImage = container.querySelector(".main img");
+        let thumbnails = container.querySelectorAll(".thumbnails img");
+
+        if (container.querySelector(".thumbnails img.active") === null) {
+          console.log("assigning active");
+          thumbnails[0].classList.add("active");
+        }
+
+        function handleHover(event) {
+          let target = event.target;
+          if (target.classList.contains("active")) {
+            return;
+          }
+
+          thumbnails.forEach(function (tne) {
+            tne.classList.remove("active");
+          });
+
+          target.classList.add("active");
+
+          mainImage.setAttribute("src", target.getAttribute("src"))
+        }
+
+        thumbnails.forEach(function (elem) {
+          elem.addEventListener("pointerenter", handleHover);
+        });
+      })();
+    </script>
+  </body>
+</html>
