@@ -10,10 +10,6 @@
         width: 45%;
       }
 
-      .container img {
-        object-fit: scale-down;
-      }
-
       .main {
         display: flex;
         align-items: center;
@@ -26,7 +22,10 @@
       .main img {
         max-width: 576px; /*max-width and max-height taken directly from Amazon*/
         max-height: 443px; /*These are also controlled via js*/
-        height: 100%!important;
+        min-width: 300px;
+        min-height: 300px;
+
+        object-fit: contain;
       }
 
       .thumbnails {
@@ -39,6 +38,8 @@
         height: 40px;
 
         outline: 2px solid gray;
+
+        object-fit: scale-down;
       }
 
       .thumbnails img.active {
@@ -96,6 +97,11 @@
         thumbnails.forEach(function (elem) {
           elem.addEventListener("pointerenter", handleHover);
         });
+
+        window.addEventListener("resize", function(){
+          let width = container.offsetWidth
+          mainImage.setAttribute("style", `width: ${width}px; height: ${width}px;`)
+        })
       })();
     </script>
   </body>
