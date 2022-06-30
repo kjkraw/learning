@@ -10,20 +10,12 @@
         width: 45%;
       }
 
-      .main {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        margin-bottom: 16px;
-        /*In the original, the height of the image container is controlled programatically*/
-      }
-
-      .main img {
+      .main-image {
         max-width: 576px; /*max-width and max-height taken directly from Amazon*/
         max-height: 443px; /*These are also controlled via js*/
         min-width: 300px;
         min-height: 300px;
+        margin-bottom: 16px;
 
         object-fit: contain;
       }
@@ -53,9 +45,7 @@
 
   <body>
     <div class="container">
-      <div class="main">
-        <img src="res/amazon-plant-product.jpg" alt="" />
-      </div>
+      <img src="res/amazon-plant-product.jpg" alt="" class="main-image" />
       <div class="thumbnails">
         <img src="res/amazon-plant-product.jpg" alt="" class="" />
         <img src="res/amazon-plant-product-2.jpg" alt="" />
@@ -67,41 +57,67 @@
     <!---->
 
     <script>
-      // Function is inside parentheses to create an anonymous function.
-      (function () {
-        let container = document.querySelector(".container");
+      class ImageContainer {
+        constructor(root) {
+          this.root = root;
+          this.mainImage = root.querySelector(".main-image");
+          this.thumbnails = root.querySelectorAll(".thumbnails img");
 
-        let mainImage = container.querySelector(".main img");
-        let thumbnails = container.querySelectorAll(".thumbnails img");
-
-        if (container.querySelector(".thumbnails img.active") === null) {
-          console.log("assigning active");
-          thumbnails[0].classList.add("active");
+          this.setup();
         }
 
-        function handleHover(event) {
-          let target = event.target;
-          if (target.classList.contains("active")) {
+        setup() {
+          if (this.root.querySelector(".thumbnails img.active") === null) {
+            this.thumbnails[0].classList.add("active");
+          }
+
+          this.thumbnails.forEach(function (elem) {
+            elem.addEventListener("pointerenter", this.handleThumbnailHover.bind(this));
+          }.bind(this));
+
+          window.addEventListener("resize", this.updateImageSize.bind(this));
+
+          this.updateImageSize();
+          this.updateImageSrc();
+        }
+
+        updateImageSize() {
+          let width = this.root.offsetWidth;
+          this.mainImage.setAttribute(
+            "style",
+            `width:${width}px; height:${width}px;`
+          );
+        }
+
+        updateImageSrc() {
+          this.mainImage.setAttribute(
+            "src",
+            this.root
+              .querySelector(".thumbnails img.active")
+              .getAttribute("src")
+          );
+        }
+
+        handleThumbnailHover(event) {
+          if (event.target.classList.contains("active")) {
             return;
           }
 
-          thumbnails.forEach(function (tne) {
-            tne.classList.remove("active");
+          this.thumbnails.forEach(function (elem) {
+            elem.classList.remove("active");
           });
+          event.target.classList.add("active");
 
-          target.classList.add("active");
-
-          mainImage.setAttribute("src", target.getAttribute("src"))
+          this.updateImageSrc();
         }
+      }
 
-        thumbnails.forEach(function (elem) {
-          elem.addEventListener("pointerenter", handleHover);
+      (function () {
+        let containers = Array.from(
+          document.querySelectorAll(".container")
+        ).map(function (root) {
+          return new ImageContainer(root);
         });
-
-        window.addEventListener("resize", function(){
-          let width = container.offsetWidth
-          mainImage.setAttribute("style", `width: ${width}px; height: ${width}px;`)
-        })
       })();
     </script>
   </body>
