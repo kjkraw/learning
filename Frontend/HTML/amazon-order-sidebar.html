@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      :root {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 0.9rem;
+      }
+
+      .order {
+        box-sizing: border-box;
+        width: 244px;
+        padding: 16px;
+
+        border: 1px solid lightgray;
+        border-radius: 8px;
+      }
+
+      .order a {
+        text-decoration: none;
+      }
+
+      .price {
+        box-sizing: border-box;
+      }
+
+      .price .currency {
+        position: relative;
+        top: -0.75rem;
+      }
+
+      .price .whole {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      .price .fraction {
+        position: relative;
+        top: -0.75rem;
+        font-weight: bold;
+      }
+
+      .price .per-unit {
+        color: darkgray;
+      }
+
+      .stock {
+        color: green;
+        font-size: 1.3rem;
+      }
+
+      button {
+        display: block;
+        width: 100%;
+        padding: 8px;
+        margin: 8px 0;
+        border: 0px;
+        border-radius: 16px;
+      }
+
+      button.add-to-cart {
+        background-color: gold;
+      }
+
+      button.buy-now {
+        background-color: orange;
+      }
+
+      .check-row {
+        display: flex;
+        align-items: flex-start;
+        
+        margin: 8px 0;
+      }
+
+      .upgrade-item {
+        display: inline-flex;
+      }
+
+      .upgrade-item a {
+        margin-right: 1rem;
+
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+
+        overflow: hidden;
+      }
+
+      .upgrade-item .price {
+        color: darkred;
+      }
+    </style>
+  </head>
+
+  <!--  -->
+
+  <body>
+    <div class="order">
+      <form action="">
+        <div class="price">
+          <span class="currency">$</span>
+          <span class="whole">19</span>
+          <span class="fraction">46</span>
+          <span class="per-unit">($3.89 / Count)</span>
+        </div>
+        <div class="shipping">
+          <p class="prime">
+            Get <b>Fast, Free Shipping</b> with <a href="">Amazon Prime</a>
+          </p>
+          <p class="standard">
+            <a href="">$<span class="delivery-cost">9.99</span> delivery</a>
+            <b><span class="delivery-date">Wednesday, July 6</span>.</b>
+          </p>
+        </div>
+        <div class="location">
+          <a href="">
+            <img
+              src="https://m.media-amazon.com/images/S/sash/kIT-Lj9i1Bch8yi.png"
+              alt=""
+            />
+            Select delivery location
+          </a>
+        </div>
+        <p class="stock">In Stock.</p>
+        <select name="quantity" id="quantity">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <button class="add-to-cart">Add to Cart</button>
+        <button class="buy-now">Buy Now</button>
+        <div id="ignore-for-now"></div>
+        <div><b>Add an Accessory:</b></div>
+        <div class="check-row">
+          <input type="checkbox" name="upgrade" id="upgrade" />
+          <label for="upgrade">
+            <div class="upgrade-item">
+              <a href="" class="name">
+                Amaze! Plant Food - Plant Fertilizer, Use on All Fruits,
+                vegetables, plants, whatever else you want! Idk, this is just a
+                long name for an example and most of this will get cut off!
+              </a>
+              <span class="price">$17.99</span>
+            </div>
+          </label>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" name="gift-receipt" id="gift-receipt" />
+          <label for="gift-receipt">Add a gift receipt for easy returns</label>
+        </div>
+      </form>
+    </div>
+
+    <!--  -->
+
+    <script></script>
+  </body>
+</html>
