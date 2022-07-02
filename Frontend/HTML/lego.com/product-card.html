@@ -7,6 +7,13 @@
     <title>Document</title>
 
     <style>
+      @font-face {
+        font-family: "Cera Pro";
+        src: url("res/font/Cera-Pro-Medium.ttf");
+        src: url("res/font/Cera-Pro-Medium.ttf"),
+          url("res/font/Cera-Pro-Light.ttf"), url("res/font/Cera-Pro-Bold.ttf");
+      }
+
       :root {
         font-family: "Cera Pro", sans-serif; /*Unfortunately, I can't get the correct font :(*/
         font-size: 16px;
@@ -130,7 +137,7 @@
     <div class="product-card new">
       <div class="thumbnail">
         <a href="" class="wishlist">
-            <!-- In the original, they use an SVG heart and rectangle -->
+          <!-- In the original, they use an SVG heart and rectangle -->
           <span class="heart"></span>Add to wish list
         </a>
         <img src="res/van-gogh.png" alt="" />
