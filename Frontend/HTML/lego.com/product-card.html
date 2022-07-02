@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      :root {
+        font-family: "Cera Pro", sans-serif; /*Unfortunately, I can't get the correct font :(*/
+        font-size: 16px;
+      }
+
+      a {
+        text-decoration: none;
+        color: black;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 1920px;
+      }
+
+      .product-card {
+        width: 25%;
+      }
+
+      .thumbnail {
+        border: 1px solid gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        margin-bottom: 1rem;
+      }
+
+      .thumbnail::after {
+        content: "New";
+        font-size: 0.75rem;
+        background-color: gold;
+        position: absolute;
+        bottom: 0.5rem;
+        left: 0.5rem;
+        padding: 0.25rem;
+      }
+
+      .wishlist {
+        position: absolute;
+        top: 0.5rem;
+        left: 0.5rem;
+        font-weight: bold;
+        font-size: 0.75rem;
+        display: flex;
+        align-items: center;
+      }
+
+      .heart::before {
+        content: "♡";
+        font-size: 1.25rem;
+        color: blue;
+        border-radius: 50%;
+        padding: 0 0.25rem;
+        min-width: 2rem;
+        min-height: 2rem;
+        background-color: lightgray;
+      }
+
+      .heart {
+        margin-right: 0.75rem;
+      }
+
+      .thumbnail img {
+        width: 90%;
+        transition: width 300ms;
+      }
+
+      .thumbnail img:hover {
+        width: 98%;
+      }
+
+      .info {
+        margin-bottom: 1rem;
+      }
+
+      .name {
+        display: -webkit-box;
+        -webkit-box-direction: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+
+      .rating {
+        color: gold;
+        font-weight: bold;
+      }
+
+      .price {
+        font-weight: bold;
+      }
+
+      button.add-to-bag {
+        background-color: darkorange;
+        font-weight: bold;
+        width: 100%;
+        height: 3rem;
+        border-radius: 4px;
+        border: none;
+      }
+
+      button.add-to-bag:hover {
+        border: 2px solid darkorange;
+        background-color: white;
+      }
+
+      /* Now we have the basic layout right. Let's start dialing things in.
+            1. Proper font.
+            2. Proper sizing.
+            3. Polish
+        */
+    </style>
+  </head>
+
+  <!--  -->
+
+  <body>
+    <div class="product-card new">
+      <div class="thumbnail">
+        <a href="" class="wishlist">
+            <!-- In the original, they use an SVG heart and rectangle -->
+          <span class="heart"></span>Add to wish list
+        </a>
+        <img src="res/van-gogh.png" alt="" />
+      </div>
+      <div class="info">
+        <a href="" class="name">Vincent van Gogh - The Starry Night</a>
+        <div class="rating">★★★★☆</div>
+        <div class="price">$169.99</div>
+      </div>
+      <button class="add-to-bag">Add to Bag</button>
+    </div>
+  </body>
+
+  <!--  -->
+
+  <script>
+    (function () {
+      document.querySelectorAll(".thumbnail").forEach(function (elem) {
+        let size = elem.parentElement.offsetWidth;
+        elem.setAttribute("style", `width: ${size}px; height: ${size}px;`);
+      });
+    })();
+  </script>
+</html>
